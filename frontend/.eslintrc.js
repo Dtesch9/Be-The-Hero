@@ -29,6 +29,7 @@ module.exports = {
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     "global-require": "off",
     "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
     camelcase: "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",

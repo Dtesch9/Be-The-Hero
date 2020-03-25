@@ -1,10 +1,12 @@
 import React from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { Form } from '@unform/web';
+import { Link } from 'react-router-dom';
 
 import heroesImg from '~/assets/heroes.png';
 
 import Input from '~/components/Form/Input';
+import Button from '~/components/Button';
 
 import { Container, Section, Logo } from './styles';
 
@@ -20,12 +22,12 @@ export default function Logon() {
           <h1>Faça seu logon</h1>
 
           <Input name="id" placeholder="Sua ID" />
-          <button type="submit">Entrar</button>
+          <Button type="submit">Entrar</Button>
 
-          <a href="/register">
+          <Link href="/register">
             <FiLogIn size={16} color="#e02041" />
             Não tenho cadastro
-          </a>
+          </Link>
         </Form>
       </Section>
 

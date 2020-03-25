@@ -7,7 +7,7 @@ const Link = styled(Rlink)`
   margin-top: 40px;
   color: #41414d;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 700;
   transition: opacity 0.2s;
 
   svg {

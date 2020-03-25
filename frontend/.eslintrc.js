@@ -30,14 +30,14 @@ module.exports = {
     "global-require": "off",
     "no-underscore-dangle": "off",
     camelcase: "off",
-    "react-hooks/rule-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
   },
-  // settings: {
-  //   "import/resolver": {
-  //     "babel-plugin-root-import": {
-  //       rootPathSuffix: "src"
-  //     },
-  //   },
-  // },
+  settings: {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        rootPathSuffix: "src"
+      },
+    },
+  },
 };

@@ -1,6 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { FiLogIn } from 'react-icons/fi';
 import { Form } from '@unform/web';
+
+import api from '~/services/api';
 
 import heroesImg from '~/assets/heroes.png';
 
@@ -11,7 +15,20 @@ import Link from '~/components/Link';
 import { Container, Section, Logo } from './styles';
 
 export default function Logon() {
-  function handleSubmit(data) {}
+  const history = useHistory();
+
+  async function handleSubmit({ id }) {
+    try {
+      const response = await api.post('sessions', { id });
+
+      localStorage.setItem('ongId', id);
+      localStorage.setItem('ongName', response.data.name);
+
+      history.push('/profile');
+    } catch (error) {
+      toast.error('Falha no login, tente novamente');
+    }
+  }
 
   return (
     <Container>

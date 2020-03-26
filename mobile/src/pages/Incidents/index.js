@@ -1,5 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -18,6 +19,12 @@ import {
 } from './styles';
 
 export default function Incidents() {
+  const navigation = useNavigation();
+
+  function navigateToDetail() {
+    navigation.navigate('Detail');
+  }
+
   const data = [1, 2, 3, 4];
 
   return (
@@ -46,7 +53,7 @@ export default function Incidents() {
             <IProperty>VALOR:</IProperty>
             <IValue>R$ 120,00</IValue>
 
-            <DetailsButton onPress={() => {}}>
+            <DetailsButton onPress={navigateToDetail}>
               <DButtonText>Ver mais detalhes</DButtonText>
               <Feather name="arrow-right" size={20} color="#e02041" />
             </DetailsButton>

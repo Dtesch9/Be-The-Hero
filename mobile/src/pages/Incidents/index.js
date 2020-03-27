@@ -25,6 +25,7 @@ export default function Incidents() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation();
 
@@ -45,10 +46,17 @@ export default function Incidents() {
       },
     });
 
-    setIncidents([...incidents, ...response.data]);
+    setIncidents(page > 1 ? [...incidents, ...response.data] : response.data);
     setTotal(response.headers['x-total-count']);
     setPage(page + 1);
     setLoading(false);
+    setRefreshing(false);
+  }
+
+  function refreshList() {
+    setRefreshing(true);
+    setPage(1);
+    loadIncidents();
   }
 
   useEffect(() => {
@@ -74,8 +82,10 @@ export default function Incidents() {
       <IncidentList
         data={incidents}
         keyExtractor={(item) => String(item.id)}
-        onEndReached={loadIncidents}
+        onRefresh={refreshList}
+        refreshing={refreshing}
         onEndReachedThreshold={0.2}
+        onEndReached={loadIncidents}
         renderItem={({ item: incident }) => (
           <Incident>
             <IProperty>ONG:</IProperty>

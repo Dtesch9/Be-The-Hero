@@ -8,7 +8,11 @@ import ProfileController from './app/controllers/ProfileController';
 
 const routes = new Router();
 
-routes.post('/sessions', SessionController.store);
+routes.post('/sessions', celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    id: Joi.string().required(),
+  })
+}), SessionController.store);
 
 routes.get('/ongs', OngController.index);
 

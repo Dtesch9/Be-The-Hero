@@ -45,7 +45,6 @@ export default function Incidents() {
       },
     });
 
-    setLoading(false);
     setIncidents([...incidents, ...response.data]);
     setTotal(response.headers['x-total-count']);
     setPage(page + 1);
@@ -54,8 +53,7 @@ export default function Incidents() {
 
   useEffect(() => {
     loadIncidents();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   function navigateToDetail(incident) {
     navigation.navigate('Detail', { incident });

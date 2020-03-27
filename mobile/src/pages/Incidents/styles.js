@@ -5,7 +5,7 @@ import logoImg from '~/assets/logo.png';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: ${Constants.statusBarHeight + 20}px 24px;
+  padding: ${Constants.statusBarHeight + 20}px 24px 0;
 `;
 
 export const Header = styled.View`

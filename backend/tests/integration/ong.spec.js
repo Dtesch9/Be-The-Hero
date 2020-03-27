@@ -4,11 +4,11 @@ import db from '../../src/database';
 
 describe('ONG', () => {
   beforeEach(async () => {
-    await db.migrate.rollback();
     await db.migrate.latest();
   });
 
   afterAll(async () => {
+    await db.migrate.rollback();
     await db.destroy();
   });
 

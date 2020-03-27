@@ -1,6 +1,6 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as MailCompose from 'expo-mail-composer';
 import { TouchableOpacity, Linking } from 'react-native';
 
@@ -21,8 +21,17 @@ import {
 
 export default function Details() {
   const navigation = useNavigation();
-  const message =
-    'Olá NPDS, estou entrando em contato pois gostaria de ajudar no caso "Sem emprego" com o valor de R$120,00';
+  const route = useRoute();
+
+  const { incident } = route.params;
+  const message = `Olá ${
+    incident.name
+  }, estou entrando em contato pois gostaria de ajudar no caso "${
+    incident.title
+  }" com o valor de ${Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(incident.value)}`;
 
   function navigateBack() {
     navigation.goBack();
@@ -30,14 +39,16 @@ export default function Details() {
 
   function sendMail() {
     MailCompose.composeAsync({
-      subject: 'Herói do caso: Sem emprego',
+      subject: `'Herói do caso: Sem emprego`,
       recipients: ['alucard.s8123@gmail.com'],
       body: message,
     });
   }
 
   function sendWhatsapp() {
-    Linking.openURL(`whatsapp://send?phone=552492004597&text=${message}`);
+    Linking.openURL(
+      `whatsapp://send?phone=${incident.whatsapp}&text=${message}`
+    );
   }
 
   return (
@@ -52,13 +63,20 @@ export default function Details() {
 
       <Incident>
         <IProperty marginBreak>ONG:</IProperty>
-        <IValue>NPDS</IValue>
+        <IValue>
+          {incident.name} de {incident.city}/{incident.uf}
+        </IValue>
 
         <IProperty>CASO:</IProperty>
-        <IValue>Sem emprego por enquanto</IValue>
+        <IValue>{incident.title}</IValue>
 
         <IProperty>VALOR:</IProperty>
-        <IValue>R$ 120,00</IValue>
+        <IValue>
+          {Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(incident.value)}
+        </IValue>
       </Incident>
 
       <ContactBox>
